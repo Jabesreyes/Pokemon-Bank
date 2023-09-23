@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKEMON BANK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        
+    <script src="https://kit.fontawesome.com/98cd0d0703.js" crossorigin="anonymous"></script>
+    <link href="../css/graficos.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">POKEMON BANK</span>
+        </div>
+    </nav>
+    <div class="p-4 d-flex justify-content-between align-items-center"><a href="#">REGRESAR</a> GRAFICO
+        TRANSACCIONES</div>
+
+
+    <div class="p-4 barraTransacciones">
+        CAMBIAR TRANSACCION:
+        <button class="btn btn-light" id="btnCambiarTransaccion"><i class="fa-solid fa-arrows-rotate fa-spin"></i> CAMBIAR</button>
+    </div>
+    <div class="modalTransacciones" id="modalTransacciones">
+        <div class="modalMenu">
+            <div class="bar">
+                <h2>SELECCIONA TRANSACCION</h2>
+                <a href="#" id="btnCerrarModal"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <a href="#" class="btnTransaccion" id="btnDeposito"><i class="fa-solid fa-receipt" id="btnRetiros"></i> DEPOSITOS</a>
+
+            <a href="#" class="btnTransaccion" id="btnRetiro"><i class="fa-solid fa-receipt" id="btnRetiros"></i> RETIROS</a>
+
+            <a href="#" class="btnTransaccion" id="btnConsulta"><i class="fa-solid fa-magnifying-glass"></i> CONSULTA DE
+                SALDOS</a>
+
+            <a href="#" class="btnTransaccion" id="btnPago"><i class="fa-solid fa-cash-register"></i> PAGOS</a>
+
+        </div>
+    </div>
+
+
+
+    <div class="p-4">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+
+<script src="../js/graficos.js"></script>
+</body>
+
+</html>
