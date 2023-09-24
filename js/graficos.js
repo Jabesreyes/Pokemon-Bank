@@ -43,20 +43,6 @@ const config = {
                 beginAtZero: true
             }
         }
-    },
-    scales: {
-        x: {
-            title: {
-                display: true,
-                text: 'Meses'
-            }
-        },
-        y: {
-            title: {
-                display: true,
-                text: 'Cantidad de transacciones'
-            }
-        }
     }
 };
 
