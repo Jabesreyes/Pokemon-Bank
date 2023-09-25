@@ -2,8 +2,8 @@
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const transacciones = ['Depositos', 'Retiros', 'Consulta de saldos', 'Pagos']
 const datosDeTransacciones = {
-    depositos: [3, 10, 5, 15, 10, 20, 5, 25, 12, 20, 8, 30],
-    retiros: [3, 7, 11, 15, 19, 23, 27, 29, 17, 13, 9, 5],
+    depositos: [3, 5, 5, 4, 6, 5, 5, 7, 12, 3, 8, 8],
+    retiros: [3, 7, 11, 15, 11, 23, 27, 29, 17, 13, 9, 5],
     consultas: [23, 2, 7, 11, 30, 4, 7, 10, 15, 22, 18, 12],
     pagos: [20, 6, 30, 14, 8, 2, 12, 18, 10, 16, 4, 22]
 }
