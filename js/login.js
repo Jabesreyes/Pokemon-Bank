@@ -87,4 +87,9 @@ function showValidationAlert(errors) {
 function saveUserData(username, rememberUser) {
     localStorage.setItem("username", username);
     localStorage.setItem("rememberUser", rememberUser);
+
+// Si el nombre de usuario es "Ash Ketchum", se guardan sus datos en el LocalStorage (clave "cliente")
+    if(username == "Ash Ketchum"){
+        localStorage.setItem("cliente", JSON.stringify(userData)); 
+    }
 }
