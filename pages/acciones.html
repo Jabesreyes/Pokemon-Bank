@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/98cd0d0703.js" crossorigin="anonymous"></script>
     
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/acciones.js"></script>
+    
 
     <title>Pokemon Bankk</title>
 </head>
@@ -28,11 +31,11 @@
     </nav>
 
     <div class="container-fluid container-name pt-1 text-center pb-3">
-        <div class="name">  
-            Ash Ketchum Wilfredo Torres
+        <div class="name" id="username">  
+           Nombre de usuario
         </div>
-        <div class="num-account">
-                0987654321
+        <div class="num-account" id="codigoCuenta">
+            000000000
         </div>
     </div>
 
@@ -66,8 +69,8 @@
             <div class="col">
                
             </div>
-            <div class="col">
-                $500.00
+            <div class="col" id="monto">
+                $0
             </div>
         </div>
     </div>
@@ -75,80 +78,23 @@
 
     <div class="container mt-5 text-center">
         <p class="d-inline-flex gap-1">
-            <button type="button" class="btn btn-primary btn-danger"  data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <button type="button"
+            id="botonDepositar"
+            class="btn btn-primary btn-danger"  >
                 Depositar
             </button>
-            <button type="button" class="btn btn-primary btn-danger"  data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+            <button type="button" 
+            id="botonRetirar"
+            class="btn btn-primary btn-danger"  >
               Retirar
             </button>
-            <button type="button" class="btn btn-primary btn-danger"  data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+            <button type="button"
+            id="botonPagar" class="btn btn-primary btn-danger"  data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
               Pagar Servicios
             </button>
         </p>
-        <div class="container mb-5">
+        <div class="container mb-5" id="formularios">
 
-            <div class="collapse mb-4" id="collapseExample">
-              <div class="card card-body">
-                  <label for="exampleFormControlInput1" class="form-label">Cuenta Origen :</label>
-                  <input type="cuenta" class="form-control" id="exampleFormControlInput1">
-                  
-                  <label for="exampleFormControlInput1" class="form-label">Cuenta Destino :</label>
-                  <input type="cuenta" class="form-control" id="exampleFormControlInput1">
-                  
-                  <label for="exampleFormControlInput1" class="form-label mt-3">Monto :</label>
-                    <div class="input-group  mb-3">
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-text">.00</span>
-                    </div>
-                  
-                  <label for="exampleFormControlInput1" class="form-label">Detalles: </label>
-                  <input type="cuenta" class="form-control" id="exampleFormControlInput1" >
-                  
-                  <button type="button" class="btn btn-danger mt-3">
-                    Continuar
-                  </button>
-              </div>
-            </div>
-            <div class="collapse mb-4" id="collapseExample2">
-              <div class="card card-body">
-                    <label for="exampleFormControlInput1" class="form-label">Cuenta Origen :</label>
-                    <input type="cuenta" class="form-control" id="exampleFormControlInput1">
-
-                    <label for="exampleFormControlInput1" class="form-label mt-3">Monto a retirar :</label>
-                    <div class="input-group  mb-3">
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-text">.00</span>
-                    </div>
-
-                    <button type="button" class="btn btn-danger mt-3">
-                      Continuar
-                    </button>
-              </div>
-            </div>
-            <div class="collapse mb-4" id="collapseExample3">
-              <div class="card card-body">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Servicio a Pagar: </option>
-                    <option value="1">Energía Eléctrica</option>
-                    <option value="2">Internet</option>
-                    <option value="3">Telefonia</option>
-                    <option value="3">Agua Potable</option>
-                </select>
-                
-                <label for="exampleFormControlInput1" class="form-label mt-3">Monto :</label>
-                    <div class="input-group  mb-3">
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-text">.00</span>
-                    </div>
-                
-                <button type="button" class="btn btn-danger mt-3">
-                Continuar
-                </button>
-              </div>
-            </div>
         </div>
     </div>
 
@@ -164,15 +110,6 @@
             </li>
         </ul>
     </nav>
-
-
-    
-    
-    
-
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
