@@ -1,18 +1,34 @@
 // codigo de la libreria Chartjs
-const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-const transacciones = ['Depositos', 'Retiros', 'Consulta de saldos', 'Pagos']
+
+const transacciones = ['Depositos', 'Retiros', 'Pagos']
+
+const transaccionesObjeto = JSON.parse(localStorage.getItem('transacciones'))
+
+const tipoRetiro = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Retiro').map(transaccion => transaccion.monto);
+const tipoDeposito = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Deposito').map(transaccion => transaccion.monto);
+const tipoPago = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Pago servicio').map(transaccion => transaccion.monto);
+
+
+const clavesRetiros = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Retiro').map(transaccion => transaccion.descripcion);
+const clavesDeposito = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Deposito').map(transaccion => transaccion.descripcion);
+const clavesPagos = Object.values(transaccionesObjeto).filter(transaccion => transaccion && transaccion.tipo === 'Pago servicio').map(transaccion => transaccion.descripcion);
+
 const datosDeTransacciones = {
-    depositos: [3, 5, 5, 4, 6, 5, 5, 7, 12, 3, 8, 8],
-    retiros: [3, 7, 11, 15, 11, 23, 27, 29, 17, 13, 9, 5],
-    consultas: [23, 2, 7, 11, 30, 4, 7, 10, 15, 22, 18, 12],
-    pagos: [20, 6, 30, 14, 8, 2, 12, 18, 10, 16, 4, 22]
+    depositos: tipoDeposito,
+    retiros: tipoRetiro,
+    pagos: tipoPago
 }
 
-const data = {
-    labels: meses,
+const descripciones = {
+    depositos: clavesDeposito,
+    retiros: clavesRetiros,
+    pagos: clavesPagos
+}
+ let data = {
+    labels: descripciones["depositos"],
     datasets: [{
         label: transacciones[0],
-        data: datosDeTransacciones['depositos'],
+        data: datosDeTransacciones["depositos"],
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 159, 64, 0.2)',
@@ -59,7 +75,6 @@ const btnCambiarTransaccion = document.getElementById('btnCambiarTransaccion')
 //botones del modal
 const btnDepositos = document.getElementById('btnDeposito')
 const btnRetiros = document.getElementById('btnRetiro')
-const btnConsultas = document.getElementById('btnConsulta')
 const btnPagos = document.getElementById('btnPago')
 
 // Evento para el boton cerrar modal
@@ -77,32 +92,28 @@ btnCambiarTransaccion.addEventListener('click', (e) => {
 // cambio de datos en la estadistica 
 btnDepositos.addEventListener('click', (e) => {
     e.preventDefault()
+    data.labels = descripciones["depositos"]
     data.datasets[0].label = transacciones[0];
-    data.datasets[0].data = datosDeTransacciones['depositos'];
+    data.datasets[0].data = datosDeTransacciones["depositos"];
     myChart.update();
     modalTransacciones.style.display = 'none'
 })
 
 btnRetiros.addEventListener('click', (e) => {
     e.preventDefault()
-    data.datasets[0].label = transacciones[1];
-    data.datasets[0].data = datosDeTransacciones['retiros'];
+    data.labels = descripciones["retiros"]
+    data.datasets[0].label = transacciones[1]
+    data.datasets[0].data = datosDeTransacciones["retiros"];
     myChart.update();
     modalTransacciones.style.display = 'none'
 })
 
-btnConsultas.addEventListener('click', (e) => {
-    e.preventDefault()
-    data.datasets[0].label = transacciones[2];
-    data.datasets[0].data = datosDeTransacciones['consultas'];
-    myChart.update();
-    modalTransacciones.style.display = 'none'
-})
 
 btnPagos.addEventListener('click', (e) => {
     e.preventDefault()
-    data.datasets[0].label = transacciones[3];
-    data.datasets[0].data = datosDeTransacciones['pagos'];
+    data.labels = descripciones["pagos"]
+    data.datasets[0].label = transacciones[2];
+    data.datasets[0].data = datosDeTransacciones["pagos"];
     myChart.update();
     modalTransacciones.style.display = 'none'
 })
