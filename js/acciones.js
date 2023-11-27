@@ -221,3 +221,26 @@ function checkLocalStorage() {
         location.href = "login.html";
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    checkLocalStorage();
+
+    // Agrega un evento de clic al icono para cerrar sesión
+    document.getElementById("closeApp").addEventListener("click", function () {
+        // Pide confirmación con SweetAlert
+        swal({
+            title: "Cerrar Sesión",
+            text: "¿Estás seguro que deseas cerrar sesión?",
+            icon: "warning",
+            buttons: ["Cancelar", "Aceptar"],
+            dangerMode: true,
+        }).then((willLogout) => {
+            // Si el usuario hace clic en "Aceptar", realiza el cierre de sesión
+            if (willLogout) {
+
+                localStorage.clear(); 
+                location.href = "login.html";
+            }
+        });
+    });
+});
