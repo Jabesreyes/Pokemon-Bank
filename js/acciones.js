@@ -1,3 +1,6 @@
+
+
+
 var formularios = [
     "<div class=' mb-4' id='collapseExample'><div class='card card-body'>" +
     "<label for='exampleFormControlInput1' class='form-label'>Cuenta Origen :</label>" +
@@ -108,7 +111,7 @@ window.onload = function () {
                 localStorage.setItem("cliente", JSON.stringify(datosUsuario));
                 document.getElementById("monto").innerText = "$" + parseFloat(datosUsuario.saldoInicial).toFixed(2);
                 document.getElementById("formularios").innerHTML = ""
-                guardarTransaccion("Deposito", montoAbono, descripcion)
+                guardarTransaccion("Deposito", montoAbono, descripcion, procesoCorrecto)
             }
 
         })
@@ -134,7 +137,7 @@ window.onload = function () {
                 localStorage.setItem("cliente", JSON.stringify(datosUsuario));
                 document.getElementById("monto").innerText = "$" + parseFloat(datosUsuario.saldoInicial).toFixed(2);
                 document.getElementById("formularios").innerHTML = ""
-                guardarTransaccion("Retiro", montoRetirar, "Retiro de efectivo " + new Date().toDateString())
+                guardarTransaccion("Retiro", montoRetirar, "Retiro de efectivo " + new Date().toDateString(), procesoCorrecto)
             }
         })
 
@@ -166,7 +169,7 @@ window.onload = function () {
                 document.getElementById("monto").innerText = "$" + parseFloat(datosUsuario.saldoInicial).toFixed(2);
                 document.getElementById("formularios").innerHTML = ""
                 guardarTransaccion("Pago servicio", montoPagar, 
-                "Pago de servicio:  " +servicio); 
+                "Pago de servicio:  " +servicio, procesoCorrecto); 
             }
         })
     })
@@ -174,33 +177,50 @@ window.onload = function () {
 
 
 
+function guardarTransaccion(tipo, monto, descripcion, procesoCorrecto) {
+    let listadoTransaccion = localStorage.getItem("transacciones");
 
-function guardarTransaccion(tipo, monto, descripcion){
-    let listadoTransaccion = localStorage.getItem("transacciones"); 
-    if(listadoTransaccion){
-        let objeto = JSON.parse(listadoTransaccion); 
-        let numeroTransaccion = objeto.contador; 
-        numeroTransaccion++; 
-        objeto["transaccion"+numeroTransaccion] = {
-            "tipo": tipo, 
-            "monto": monto, 
-            "descripcion": descripcion, 
-            "fecha" :  new Date() 
-        }; 
-        objeto.contador++; 
-        console.log(objeto); 
-        localStorage.setItem("transacciones", JSON.stringify(objeto) ); 
-    }else{
+    if (listadoTransaccion) {
+        let objeto = JSON.parse(listadoTransaccion);
+        let numeroTransaccion = objeto.contador;
+        numeroTransaccion++;
+        objeto["transaccion" + numeroTransaccion] = {
+            "tipo": tipo,
+            "monto": monto,
+            "descripcion": descripcion,
+            "fecha": new Date()
+        };
+        objeto.contador++;
+        console.log(objeto);
+        localStorage.setItem("transacciones", JSON.stringify(objeto));
+    } else {
         let primeraTransaccion = {
-           "transaccion1" : {
-                "tipo": tipo, 
-                "monto": monto, 
-                "descripcion": descripcion, 
-                "fecha" :  new Date() 
-            }, 
-            "contador" : 1
+            "transaccion1": {
+                "tipo": tipo,
+                "monto": monto,
+                "descripcion": descripcion,
+                "fecha": new Date()
+            },
+            "contador": 1
         }
-        localStorage.setItem("transacciones", JSON.stringify(primeraTransaccion) ); 
+        localStorage.setItem("transacciones", JSON.stringify(primeraTransaccion));
+    }
+
+    if (procesoCorrecto) {
+        swal({
+            title: "Transacción Exitosa",
+            text: "¿Desea generar un comprobante en formato PDF?",
+            icon: "success",
+            buttons: ["Cancelar", "Generar PDF"],
+        }).then((generarPDF) => {
+            if (generarPDF) {
+                if (typeof jsPDF !== 'undefined') {
+                    generarComprobantePDF(tipo, parseFloat(monto), descripcion);
+                } else {
+                    console.error('La biblioteca jsPDF no está definida.');
+                }
+            }
+        });
     }
 }
 
@@ -244,3 +264,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
+function generarComprobantePDF(tipo, monto, descripcion) {
+    var doc = new jsPDF();
+
+    // Añadir contenido al PDF
+    doc.text("Comprobante de Transacción", 20, 20);
+    doc.text(`Tipo: ${tipo}`, 20, 30);
+    doc.text(`Monto: $${monto.toFixed(2)}`, 20, 40);
+    doc.text(`Descripción: ${descripcion}`, 20, 50);
+    doc.text(`Fecha: ${new Date().toLocaleString()}`, 20, 60);
+
+    doc.save('Transaccion.pdf');
+}
+
